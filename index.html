@@ -2,23 +2,14 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
-    <style>
-    /*
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }*/
-    </style>
     <link rel="stylesheet" href="/Adminica2/styles/plugins/all/plugins.css"/>
     <link rel="stylesheet" href="/Adminica2/styles/adminica/all.css"/>
     <link rel="stylesheet" href="/Adminica2/styles/themes/nav_top.css" />
     <link rel="stylesheet" href="/static/css/sua_chat.css" />
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/nicescroll/3.5.4/jquery.nicescroll.js'></script>
+    <script src="/static/js/chat_node.js"></script>
   </head>
   <body>
     <!-- Nuevo estilo SUA -->
@@ -27,8 +18,7 @@
         <div style="margin-bottom: -10px; display: block;" class="clearfix" id="topbar">
             <table width="100%" border="0">
               <tbody>
-                <tr><td>&nbsp;</td><td><h1>Sistema Único de Autenticación del TSJCDMX</h1></td><td>&nbsp;</td><td>&nbsp;</td>
-                </tr>
+                <tr><td>&nbsp;</td><td><h1>Sistema Único de Autenticación del TSJCDMX</h1></td><td>&nbsp;</td><td>&nbsp;</td></tr>
                 <tr>
                   <td valign="bottom" align="left" colspan="2" id="tit_nom_juzgado" style="color: black; font-weight: bold;">&nbsp;</td>
                   <td valign="bottom" align="right" id="fecha" style="color: black; font-weight: bold;">&nbsp;</td>
@@ -46,12 +36,6 @@
     <div class="main_container container_16 clearfix ui-sortable">
       <div id="pjax">
       <div id="wrapper">
-        <ul id="messages"></ul>
-        <form action="#" id="miForm">
-          <input id="m" autocomplete="off" /><button>Send</button>
-        </form>
-
-
         <!-- Nuevo estilo -->
         <div class="ui">
           <!-- Área de usuarios conectados -->
@@ -59,14 +43,14 @@
             <form action="#" class="search">
               <input placeholder="Buscar..." name="" id="" type="search">
             </form>
-            <menu class="list-friends" style="overflow: hidden;" tabindex="5000">
-              <li>
+            <menu id="users" class="list-friends" style="overflow: hidden;" tabindex="5000">
+              <!--<li>
                 <img src="https://lh3.googleusercontent.com/-OLaAp4ZKpbI/UfmuRpD2ORI/AAAAAAAAAL4/wqlxbk6nAgkpaAlgIATKHmf9G5UlAFGFQCEw/w140-h140-p/903890_604275102933777_594620786_o.jpg" width="50" height="50">
                 <div class="info">
                   <div class="user">Román</div>
                   <div class="status on"> online</div>
                 </div>
-              </li>
+              </li>-->
             </menu>
           </div>
           <!-- Termina área de usuarios conectados -->
@@ -85,11 +69,11 @@
             </div>
             <!-- Termina el área del usuario en comunicación -->
             <!-- Área principal con los mensajes -->
-            <ul class="messages" style="overflow: hidden;" tabindex="5001">
-              <li class="i">
+            <ul class="messages" id="messages" style="overflow-y: scroll;" tabindex="5001">
+              <li class="friend">
                 <div class="head">
-                  <span class="time">10:13 AM, Today</span>
-                  <span class="name">Román</span>
+                  <span class="name">Compañero</span>
+                  <span class="time">10:15 AM, Today</span>
                 </div>
                 <div class="message">Hola mundo!</div>
               </li>
@@ -97,31 +81,21 @@
             <!-- Termina área de mensajes -->
             <!-- Área de forma para enviar un mensaje -->
             <div class="write-form">
-              <textarea placeholder="Type your message" name="e" id="texxt" rows="2"></textarea>
-              <i class="fa fa-picture-o"></i>
-              <i class="fa fa-file-o"></i>
-              <button class="send">Send</button>
+              <form id="miForm" action="#">
+                <input placeholder="Escriba su mensaje" name="m" id="m" autocomplete="off" />
+                <i class="fa fa-picture-o"></i>
+                <i class="fa fa-file-o"></i>
+                <button type="submit" class="send">Enviar</button>
+              </form>
             </div>
             <!-- Termina área de forma para enviar mensajes -->
           </div>
           <!-- Termina el área del chat -->
         </div>
         <!-- Termina el nuevo estilo -->
-
       </div>
     </div>
     </div>
     <!-- Termina el nuevo estilo SUA -->
-    <script>
-    var socket = io();
-    $('#miForm').submit(function(){
-      socket.emit('chat message', $('#m').val());
-      $('#m').val('');
-      return false;
-    });
-    socket.on('chat message', function(msg){
-      $('#messages').append($('<li>').text(msg));
-    });
-  </script>
   </body>
 </html>

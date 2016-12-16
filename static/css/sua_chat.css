@@ -49,7 +49,8 @@
 .ui .chat {
   width: 70%;
   height: 100%;
-  background: #f1f5f8;
+  /*background: #f1f5f8;*/
+  background: #f6f6f6;
 }
 .ui .chat .info {
   display: -webkit-inline-box;
@@ -85,6 +86,7 @@
   list-style: none;
   font-size: 13px;
   height: 88%;
+  padding: 0;
 }
 .ui .list-friends img {
   margin: 5px;
@@ -140,6 +142,7 @@
   border: 2px solid #fff;
   border-left: none;
   border-right: none;
+  padding: 0;
 }
 .ui .messages li {
   margin: 10px;
@@ -172,9 +175,9 @@
 .ui .messages li .message {
   margin-top: 20px;
   color: #fff;
-  font-size: 15px;
+  /*font-size: 15px;*/
   border-radius: 3px;
-  padding: 20px;
+  padding: 5px;
   line-height: 25px;
   max-width: 500px;
   word-wrap: break-word;
@@ -190,19 +193,19 @@
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
-.ui .messages li.friend-with-a-SVAGina .name {
+.ui .messages li.friend .name {
   margin-left: 20px;
 }
-.ui .messages li.friend-with-a-SVAGina .name:after {
+.ui .messages li.friend .name:after {
   background-color: #62bf6e;
   left: -20px;
   top: 6px;
 }
-.ui .messages li.friend-with-a-SVAGina .message {
+.ui .messages li.friend .message {
   background-color: #62bf6e;
   float: left;
 }
-.ui .messages li.friend-with-a-SVAGina .message:before {
+.ui .messages li.friend .message:before {
   left: 16px;
   border-bottom-color: #62bf6e;
 }
@@ -228,15 +231,16 @@
 .ui .write-form {
   height: 150px;
 }
-.ui .write-form textarea {
+.ui .write-form input {
   width: 90%;
   outline: none;
   padding: 15px;
   border: none;
   border-radius: 3px;
   resize: none;
+  background-color: white;
 }
-.ui .write-form textarea:before {
+.ui .write-form input:before {
   content: '';
   clear: both;
 }
